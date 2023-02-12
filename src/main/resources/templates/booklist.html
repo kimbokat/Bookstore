@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<title>Online Bookstore</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Welcome to the Bookstore!</h1>
+
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Author</th>
+			<th>Price</th>
+			<th>ISBN</th>
+		<tr th:each="book : ${books}">
+			<td th:text="${book.title} + ' ' + '(' + ${book.year} + ')'"></td>
+			<td th:text="${book.author}"></td>
+			<td th:text="${book.price}"></td>
+			<td th:text="${book.isbn}"></td>
+			<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+		</tr>
+		</tbody>
+	</table>
+	<a href="/add">Add a book</a>
+
+</body>
+
+</html>
