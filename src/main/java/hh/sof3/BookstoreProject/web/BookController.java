@@ -30,10 +30,16 @@ public class BookController {
 		return "addbook";
 	}
 	
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/save", method =  { RequestMethod.POST, RequestMethod.PUT })
 	public String save(Book book) {
 		repository.save(book);
 		return "redirect:booklist";
+	}
+	
+	@RequestMapping(value = "/edit/{id}")
+	public String editBook(@PathVariable("id") Long bookId, Model model) {
+	    model.addAttribute("book", repository.findById(bookId));
+	    return "editbook";
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
