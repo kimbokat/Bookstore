@@ -5,40 +5,39 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Book {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
+
 	private Long id;
 	private String title;
 	private String author;
-	@Column(name="publishing_year")
+	@Column(name = "publishing_year")
 	private int year;
 	private String isbn;
 	private double price;
 
-	public Book() {
-		super();
-		this.title = null;
-		this.author = null;
-		this.year = 0;
-		this.isbn = null;
-		this.price = 0;
-	}
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	private Category category;
 
-	public Book(String title, String author, int year, String isbn, double price) {
+	public Book() {}
+
+	public Book(String title, String author, int year, String isbn, double price, Category category) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.year = year;
 		this.isbn = isbn;
 		this.price = price;
+		this.category = category;
 	}
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -46,7 +45,7 @@ public class Book {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -87,14 +86,22 @@ public class Book {
 		this.price = price;
 	}
 
-	@Override
-	public String toString() {
-		return "Title: " + title + ", Author: " + author + ", Year: " + year + ", ISBN: " + isbn + ", Price: " + price;
+	public Category getCategory() {
+		return category;
 	}
 
-	
-	
-	
-	
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		if (this.category != null)
+			return "Title: " + title + ", Author: " + author + ", Year: " + year + ", ISBN: " + isbn + ", Price: "
+					+ price + this.getCategory();
+		else
+			return "Title: " + title + ", Author: " + author + ", Year: " + year + ", ISBN: " + isbn + ", Price: "
+					+ price;
+	}
 
 }

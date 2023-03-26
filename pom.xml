@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.2</version>
+		<version>3.0.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>hh.sof3</groupId>
@@ -13,6 +13,7 @@
 	<name>BookstoreProject</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
+		<jakarta-servlet.version>5.0.0</jakarta-servlet.version>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
